@@ -1,6 +1,5 @@
 package com.project.manual.medicalquestionnaire.domain;
 
-import jakarta.persistence.Id;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Question {
-  private String questionId;
+  private String id;
+  private boolean enabled;
+  private int order;
   private String text;
   private List<Choice> choices;
 }
