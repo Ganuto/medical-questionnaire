@@ -8,8 +8,9 @@ public abstract class QuestionnaireMapper {
   public static QuestionnaireResponse toResponse(Questionnaire questionnaire) {
     QuestionnaireResponse questionnaireResponse = new QuestionnaireResponse();
 
-    questionnaireResponse.setQuestionnaireId(questionnaire.getQuestionnaireId());
-    questionnaireResponse.setTitle(questionnaireResponse.getTitle());
+    questionnaireResponse.setId(questionnaire.getId());
+    questionnaireResponse.setTitle(questionnaire.getTitle());
+    questionnaireResponse.setEnabled(questionnaire.isEnabled());
     questionnaireResponse.setQuestions(questionnaire.getQuestions());
     questionnaireResponse.setCreatedAt(questionnaire.getCreatedAt());
 

@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface QuestionnaireService {
   List<QuestionnaireResponse> findAll();
+  QuestionnaireResponse findById(String id);
 }
