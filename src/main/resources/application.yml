@@ -18,5 +18,5 @@ spring:
     property-naming-strategy: SNAKE_CASE
   data:
     mongodb:
-      uri: mongodb+srv://manual-case-study:123qwe@manual.utkqf.mongodb.net/questionnaire?retryWrites=true&w=majority&appName=manual # Test and assessment purpose, no need to worry XD
+      uri: mongodb+srv://manual-case-study:123@ganuto.mlclk.mongodb.net/questionnaire?retryWrites=true&w=majority&appName=ganuto # Test and assessment purpose, no need to worry XD
       field-naming-strategy: org.springframework.data.mapping.model.SnakeCaseFieldNamingStrategy

@@ -17,6 +17,4 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
   public List<QuestionnaireResponse> findAll() {
     return QuestionnaireMapper.toResponseList(questionnaireRepository.findAll());
   }
-
-
 }
