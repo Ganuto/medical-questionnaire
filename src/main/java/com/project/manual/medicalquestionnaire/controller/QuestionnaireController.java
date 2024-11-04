@@ -2,9 +2,8 @@ package com.project.manual.medicalquestionnaire.controller;
 
 import com.project.manual.medicalquestionnaire.controller.data.response.QuestionnaireResponse;
 import com.project.manual.medicalquestionnaire.service.QuestionnaireService;
-import java.util.List;
-
 import jakarta.validation.constraints.Pattern;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
