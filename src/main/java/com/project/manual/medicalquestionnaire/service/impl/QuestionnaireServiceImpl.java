@@ -40,23 +40,15 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
   public List<String> processRecommendation(QuestionnaireAnswerRequest questionnaireAnswerRequest) {
     QuestionnaireAnswer questionnaireAnswer =
         QuestionnaireMapper.toQuestionnaireAnswer(questionnaireAnswerRequest);
-    return getRecommendations(questionnaireAnswer);
+    return extractRecommendedProductIds(questionnaireAnswer);
   }
 
-  private List<String> getRecommendations(QuestionnaireAnswer questionnaireAnswer) {
+  private List<String> extractRecommendedProductIds(QuestionnaireAnswer questionnaireAnswer) {
     List<String> recommendedProducts = new ArrayList<>();
     for (Answer answer : questionnaireAnswer.getAnswers()) {
       RuleCondition ruleCondition = QuestionnaireMapper.toRuleCondition(answer);
-      Optional<RecommendationRule> recommendationRuleOptional =
-          recommendationRuleRepository.findByQuestionnaireIdAndConditionsIn(
-              questionnaireAnswer.getQuestionnaireId(), ruleCondition);
       RecommendationRule recommendationRule =
-          recommendationRuleOptional.orElseThrow(
-              () ->
-                  new NotFoundException(
-                      String.format(
-                          "Recommendation rule not found for answer [%s] with questionnaire id [%s]",
-                          answer, questionnaireAnswer.getQuestionnaireId())));
+          getRecommendationRule(questionnaireAnswer.getQuestionnaireId(), ruleCondition);
       if (recommendationRule.isRejection()) {
         return List.of();
       }
@@ -65,5 +57,18 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
       }
     }
     return recommendedProducts;
+  }
+
+  private RecommendationRule getRecommendationRule(
+      String questionnaireId, RuleCondition ruleCondition) {
+    Optional<RecommendationRule> recommendationRuleOptional =
+        recommendationRuleRepository.findByQuestionnaireIdAndConditionsIn(
+            questionnaireId, ruleCondition);
+    return recommendationRuleOptional.orElseThrow(
+        () ->
+            new NotFoundException(
+                String.format(
+                    "Recommendation rule not found for answer [%s] with questionnaire id [%s]",
+                    ruleCondition, questionnaireId)));
   }
 }
