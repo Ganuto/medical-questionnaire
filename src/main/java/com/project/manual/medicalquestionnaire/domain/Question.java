@@ -8,10 +8,12 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Getter
 @Setter
 public class Question {
-  @Field("id")
+  @Field("id") // In the future, should be changed to @MongoId(FieldType.OBJECT_ID)
   private String id;
+
   private boolean enabled;
-  private int order;
+  private Integer order;
   private String title;
   private List<Choice> choices;
+  private List<Question> subQuestions;
 }

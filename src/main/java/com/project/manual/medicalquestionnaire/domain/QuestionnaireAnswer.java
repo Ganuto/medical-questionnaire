@@ -1,15 +1,15 @@
 package com.project.manual.medicalquestionnaire.domain;
 
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-import java.util.List;
+import lombok.ToString;
 
 @Getter
 @Setter
-@Document(collection = "questionnaire_answer")
+@ToString
 public class QuestionnaireAnswer {
-    private String questionnaireId;
-    private List<QuestionnaireAnswerQuestion> questions;
+  private String questionnaireId;
+  private Long userId;
+  private List<Answer> answers;
 }
