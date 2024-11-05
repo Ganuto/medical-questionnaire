@@ -9,8 +9,8 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Getter
 @Setter
-@Document(collection = "recommendation_rule")
-public class RecommendationRule {
+@Document(collection = "product_recommendation_rule")
+public class ProductRecommendationRule {
   @MongoId(FieldType.OBJECT_ID)
   private String id;
   private boolean isRejection;
