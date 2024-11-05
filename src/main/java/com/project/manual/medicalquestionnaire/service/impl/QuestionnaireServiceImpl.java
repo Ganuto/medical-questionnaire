@@ -48,7 +48,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     for (Answer answer : questionnaireAnswer.getAnswers()) {
       RuleCondition ruleCondition = QuestionnaireMapper.toRuleCondition(answer);
       ProductRecommendationRule productRecommendationRule =
-          getRecommendationRule(questionnaireAnswer.getQuestionnaireId(), ruleCondition);
+          findRecommendationRule(questionnaireAnswer.getQuestionnaireId(), ruleCondition);
       if (productRecommendationRule.isRejection()) {
         return List.of();
       }
@@ -59,7 +59,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     return recommendedProducts;
   }
 
-  private ProductRecommendationRule getRecommendationRule(
+  private ProductRecommendationRule findRecommendationRule(
       String questionnaireId, RuleCondition ruleCondition) {
     Optional<ProductRecommendationRule> recommendationRuleOptional =
         recommendationRuleRepository.findByQuestionnaireIdAndConditionsIn(
