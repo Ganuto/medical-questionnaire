@@ -15,4 +15,4 @@ WORKDIR /app
 # Copy the built JAR file from the previous stage to the container
 COPY --from=build /app/target/medical-questionnaire-1.0.0.jar .
 # Set the command to run the application
-CMD ["java", "-jar", "Dockerfile-1.0.0.jar"]
+CMD ["java", "-jar", "medical-questionnaire-1.0.0.jar"]
