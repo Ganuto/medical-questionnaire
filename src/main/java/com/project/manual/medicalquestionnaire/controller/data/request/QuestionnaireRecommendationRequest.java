@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class QuestionnaireAnswerRequest {
+public class QuestionnaireRecommendationRequest {
   @NotEmpty
   @Pattern(regexp = "^[a-f\\d]{24}$", message = "Id must follow the regex pattern [^[a-f\\d]{24}$]")
   private String questionnaireId;

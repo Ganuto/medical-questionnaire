@@ -8,7 +8,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class QuestionnaireAnswer {
+public class QuestionnaireRecommendation {
   private String questionnaireId;
   private Long userId;
   private List<Answer> answers;

@@ -1,6 +1,6 @@
 package com.project.manual.medicalquestionnaire.service.impl;
 
-import com.project.manual.medicalquestionnaire.controller.data.request.QuestionnaireAnswerRequest;
+import com.project.manual.medicalquestionnaire.controller.data.request.QuestionnaireRecommendationRequest;
 import com.project.manual.medicalquestionnaire.controller.data.response.QuestionnaireResponse;
 import com.project.manual.medicalquestionnaire.domain.*;
 import com.project.manual.medicalquestionnaire.mapper.QuestionnaireMapper;
@@ -37,18 +37,18 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
   }
 
   @Override
-  public List<String> processRecommendation(QuestionnaireAnswerRequest questionnaireAnswerRequest) {
-    QuestionnaireAnswer questionnaireAnswer =
-        QuestionnaireMapper.toQuestionnaireAnswer(questionnaireAnswerRequest);
-    return extractRecommendedProductIds(questionnaireAnswer);
+  public List<String> processRecommendation(QuestionnaireRecommendationRequest questionnaireRecommendationRequest) {
+    QuestionnaireRecommendation questionnaireRecommendation =
+        QuestionnaireMapper.toQuestionnaireAnswer(questionnaireRecommendationRequest);
+    return extractRecommendedProductIds(questionnaireRecommendation);
   }
 
-  private List<String> extractRecommendedProductIds(QuestionnaireAnswer questionnaireAnswer) {
+  private List<String> extractRecommendedProductIds(QuestionnaireRecommendation questionnaireRecommendation) {
     List<String> recommendedProducts = new ArrayList<>();
-    for (Answer answer : questionnaireAnswer.getAnswers()) {
+    for (Answer answer : questionnaireRecommendation.getAnswers()) {
       RuleCondition ruleCondition = QuestionnaireMapper.toRuleCondition(answer);
       ProductRecommendationRule productRecommendationRule =
-          findRecommendationRule(questionnaireAnswer.getQuestionnaireId(), ruleCondition);
+          findRecommendationRule(questionnaireRecommendation.getQuestionnaireId(), ruleCondition);
       if (productRecommendationRule.isRejection()) {
         return List.of();
       }

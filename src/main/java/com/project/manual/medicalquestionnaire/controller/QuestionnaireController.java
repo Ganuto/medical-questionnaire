@@ -1,6 +1,6 @@
 package com.project.manual.medicalquestionnaire.controller;
 
-import com.project.manual.medicalquestionnaire.controller.data.request.QuestionnaireAnswerRequest;
+import com.project.manual.medicalquestionnaire.controller.data.request.QuestionnaireRecommendationRequest;
 import com.project.manual.medicalquestionnaire.controller.data.response.QuestionnaireResponse;
 import com.project.manual.medicalquestionnaire.service.QuestionnaireService;
 import jakarta.validation.Valid;
@@ -30,8 +30,8 @@ public class QuestionnaireController {
 
   @PostMapping("/questionnaire/submit")
   public ResponseEntity<List<String>> getRecommendation(
-      @RequestBody @Valid QuestionnaireAnswerRequest questionnaireAnswerRequest) {
+      @RequestBody @Valid QuestionnaireRecommendationRequest questionnaireRecommendationRequest) {
     return ResponseEntity.ok(
-        questionnaireService.processRecommendation(questionnaireAnswerRequest));
+        questionnaireService.processRecommendation(questionnaireRecommendationRequest));
   }
 }
