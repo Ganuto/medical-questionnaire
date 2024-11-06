@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class QuestionnaireRecommendationRequest {
   @NotEmpty
-  @Pattern(regexp = "^[a-f\\d]{24}$", message = "Id must follow the regex pattern [^[a-f\\d]{24}$]")
+  @Pattern(regexp = "^[a-f\\d]{24}$", message = "Id must match '^[a-f\\d]{24}$'")
   private String questionnaireId;
   @NotNull private Long userId;
   @NotEmpty private List<Answer> answers;

@@ -2,6 +2,7 @@ package com.project.manual.medicalquestionnaire.service.impl;
 
 import com.project.manual.medicalquestionnaire.controller.data.request.QuestionnaireRecommendationRequest;
 import com.project.manual.medicalquestionnaire.controller.data.response.QuestionnaireResponse;
+import com.project.manual.medicalquestionnaire.controller.data.response.RecommendationResponse;
 import com.project.manual.medicalquestionnaire.domain.*;
 import com.project.manual.medicalquestionnaire.mapper.QuestionnaireMapper;
 import com.project.manual.medicalquestionnaire.repository.QuestionnaireRepository;
@@ -37,26 +38,31 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
   }
 
   @Override
-  public List<String> processRecommendation(QuestionnaireRecommendationRequest questionnaireRecommendationRequest) {
+  public RecommendationResponse processRecommendation(
+      QuestionnaireRecommendationRequest questionnaireRecommendationRequest) {
     QuestionnaireRecommendation questionnaireRecommendation =
         QuestionnaireMapper.toQuestionnaireAnswer(questionnaireRecommendationRequest);
-    return extractRecommendedProductIds(questionnaireRecommendation);
+    Recommendation recommendation = extractRecommendedProductIds(questionnaireRecommendation);
+    return QuestionnaireMapper.recommendationResponse(recommendation);
   }
 
-  private List<String> extractRecommendedProductIds(QuestionnaireRecommendation questionnaireRecommendation) {
+  private Recommendation extractRecommendedProductIds(
+      QuestionnaireRecommendation questionnaireRecommendation) {
+    Recommendation recommendation = new Recommendation();
     List<String> recommendedProducts = new ArrayList<>();
     for (Answer answer : questionnaireRecommendation.getAnswers()) {
       RuleCondition ruleCondition = QuestionnaireMapper.toRuleCondition(answer);
       ProductRecommendationRule productRecommendationRule =
           findRecommendationRule(questionnaireRecommendation.getQuestionnaireId(), ruleCondition);
       if (productRecommendationRule.isRejection()) {
-        return List.of();
+        return recommendation;
       }
       if (productRecommendationRule.getRecommendedProductIds() != null) {
         recommendedProducts.addAll(productRecommendationRule.getRecommendedProductIds());
       }
     }
-    return recommendedProducts;
+    recommendation.setRecommendedProducts(recommendedProducts);
+    return recommendation;
   }
 
   private ProductRecommendationRule findRecommendationRule(

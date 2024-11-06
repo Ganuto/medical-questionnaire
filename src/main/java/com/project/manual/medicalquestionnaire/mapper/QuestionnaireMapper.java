@@ -2,10 +2,9 @@ package com.project.manual.medicalquestionnaire.mapper;
 
 import com.project.manual.medicalquestionnaire.controller.data.request.QuestionnaireRecommendationRequest;
 import com.project.manual.medicalquestionnaire.controller.data.response.QuestionnaireResponse;
-import com.project.manual.medicalquestionnaire.domain.Answer;
-import com.project.manual.medicalquestionnaire.domain.Questionnaire;
-import com.project.manual.medicalquestionnaire.domain.QuestionnaireRecommendation;
-import com.project.manual.medicalquestionnaire.domain.RuleCondition;
+import com.project.manual.medicalquestionnaire.controller.data.response.RecommendationResponse;
+import com.project.manual.medicalquestionnaire.domain.*;
+
 import java.util.List;
 
 public abstract class QuestionnaireMapper {
@@ -40,5 +39,11 @@ public abstract class QuestionnaireMapper {
     ruleCondition.setChoiceId(answer.getChoiceId());
     ruleCondition.setSubQuestionChoiceId(answer.getSubQuestionChoiceId());
     return ruleCondition;
+  }
+
+  public static RecommendationResponse recommendationResponse(Recommendation recommendation){
+    RecommendationResponse recommendationResponse = new RecommendationResponse();
+    recommendationResponse.setRecommendedProducts(recommendation.getRecommendedProducts());
+    return recommendationResponse;
   }
 }

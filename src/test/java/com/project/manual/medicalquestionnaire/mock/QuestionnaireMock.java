@@ -1,6 +1,8 @@
 package com.project.manual.medicalquestionnaire.mock;
 
+import com.project.manual.medicalquestionnaire.controller.data.request.QuestionnaireRecommendationRequest;
 import com.project.manual.medicalquestionnaire.controller.data.response.QuestionnaireResponse;
+import com.project.manual.medicalquestionnaire.domain.Answer;
 import com.project.manual.medicalquestionnaire.domain.Choice;
 import com.project.manual.medicalquestionnaire.domain.Question;
 import java.time.LocalDateTime;
@@ -15,6 +17,23 @@ public abstract class QuestionnaireMock {
     questionnaireResponse.setQuestions(List.of(createQuestionMock()));
     questionnaireResponse.setCreatedAt(LocalDateTime.of(2024, 8, 19, 0, 0));
     return questionnaireResponse;
+  }
+
+  public static QuestionnaireRecommendationRequest createQuestionnaireRecommendationRequestMock() {
+    QuestionnaireRecommendationRequest questionnaireRecommendationRequest =
+        new QuestionnaireRecommendationRequest();
+    questionnaireRecommendationRequest.setUserId(1337L);
+    questionnaireRecommendationRequest.setQuestionnaireId("8029565399d62832fd94b645");
+    questionnaireRecommendationRequest.setAnswers(List.of(createAnswerMock()));
+    return questionnaireRecommendationRequest;
+  }
+
+  public static Answer createAnswerMock() {
+    Answer answer = new Answer();
+    answer.setQuestionId("1");
+    answer.setChoiceId("1");
+    answer.setSubQuestionChoiceId(null);
+    return answer;
   }
 
   private static Question createQuestionMock() {
