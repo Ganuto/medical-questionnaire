@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.manual</groupId>
 	<artifactId>medical-questionnaire</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>medical-questionnaire</name>
 	<description>Manual - Backend Engineer Case Study</description>
 

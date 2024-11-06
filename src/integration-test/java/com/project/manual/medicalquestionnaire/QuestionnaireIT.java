@@ -10,5 +10,5 @@ public class QuestionnaireIT {
     @Autowired
     private ObjectMapper objectMapper;
 
-    
+
 }
