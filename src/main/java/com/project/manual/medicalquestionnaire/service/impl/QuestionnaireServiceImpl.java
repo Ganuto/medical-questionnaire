@@ -48,21 +48,19 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
   private Recommendation extractRecommendedProductIds(
       QuestionnaireRecommendation questionnaireRecommendation) {
-    Recommendation recommendation = new Recommendation();
     List<String> recommendedProducts = new ArrayList<>();
     for (Answer answer : questionnaireRecommendation.getAnswers()) {
       RuleCondition ruleCondition = QuestionnaireMapper.toRuleCondition(answer);
       ProductRecommendationRule productRecommendationRule =
           findRecommendationRule(questionnaireRecommendation.getQuestionnaireId(), ruleCondition);
       if (productRecommendationRule.isRejection()) {
-        return recommendation;
+        return new Recommendation();
       }
       if (productRecommendationRule.getRecommendedProductIds() != null) {
         recommendedProducts.addAll(productRecommendationRule.getRecommendedProductIds());
       }
     }
-    recommendation.setRecommendedProducts(recommendedProducts);
-    return recommendation;
+    return new Recommendation(recommendedProducts);
   }
 
   private ProductRecommendationRule findRecommendationRule(

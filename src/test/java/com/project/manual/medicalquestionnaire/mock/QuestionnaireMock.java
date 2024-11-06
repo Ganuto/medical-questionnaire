@@ -5,10 +5,21 @@ import com.project.manual.medicalquestionnaire.controller.data.response.Question
 import com.project.manual.medicalquestionnaire.domain.Answer;
 import com.project.manual.medicalquestionnaire.domain.Choice;
 import com.project.manual.medicalquestionnaire.domain.Question;
+import com.project.manual.medicalquestionnaire.domain.Questionnaire;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public abstract class QuestionnaireMock {
+  public static Questionnaire createQuestionnaireMock() {
+    Questionnaire questionnaire = new Questionnaire();
+    questionnaire.setId("6729565399d62821fd94b245");
+    questionnaire.setEnabled(true);
+    questionnaire.setTitle("Erectile Dysfunction Questionnaire");
+    questionnaire.setQuestions(List.of(createQuestionMock()));
+    questionnaire.setCreatedAt(LocalDateTime.of(2024, 8, 19, 0, 0));
+    return questionnaire;
+  }
+
   public static QuestionnaireResponse createQuestionnaireResponseMock() {
     QuestionnaireResponse questionnaireResponse = new QuestionnaireResponse();
     questionnaireResponse.setId("6729565399d62821fd94b245");
