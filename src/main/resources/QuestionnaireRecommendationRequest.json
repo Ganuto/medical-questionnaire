@@ -1,0 +1,31 @@
+{
+  "questionnaire_id": "6729565399d62821fd94b245",
+  "user_id": 1,
+  "answers": [
+    {
+      "question_id": "1",
+      "choice_id": "1",
+      "sub_question_choice_id": null
+    },
+    {
+      "question_id": "2",
+      "choice_id": "1",
+      "sub_question_choice_id": "2"
+    },
+    {
+      "question_id": "3",
+      "choice_id": "2",
+      "sub_question_choice_id": null
+    },
+    {
+      "question_id": "4",
+      "choice_id": "5",
+      "sub_question_choice_id": null
+    },
+    {
+      "question_id": "5",
+      "choice_id": "5",
+      "sub_question_choice_id": null
+    }
+  ]
+}
