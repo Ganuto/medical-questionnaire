@@ -5,10 +5,20 @@ import static org.junit.Assert.assertEquals;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.project.manual.medicalquestionnaire.controller.data.request.QuestionnaireRecommendationRequest;
 import com.project.manual.medicalquestionnaire.controller.data.response.QuestionnaireResponse;
+import com.project.manual.medicalquestionnaire.controller.data.response.RecommendationResponse;
+import com.project.manual.medicalquestionnaire.domain.Answer;
+import com.project.manual.medicalquestionnaire.domain.ProductRecommendationRule;
 import com.project.manual.medicalquestionnaire.domain.Questionnaire;
+import com.project.manual.medicalquestionnaire.domain.RuleCondition;
+import com.project.manual.medicalquestionnaire.mock.QuestionnaireMock;
 import com.project.manual.medicalquestionnaire.repository.QuestionnaireRepository;
+import com.project.manual.medicalquestionnaire.repository.RecommendationRuleRepository;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +30,7 @@ public class QuestionnaireIT extends ApplicationIT {
 
   @Autowired private ObjectMapper objectMapper;
   @Autowired private QuestionnaireRepository questionnaireRepository;
+  @Autowired private RecommendationRuleRepository recommendationRuleRepository;
 
   @Test
   public void findAllSuccessfully() throws JsonProcessingException {
@@ -101,5 +112,26 @@ public class QuestionnaireIT extends ApplicationIT {
             .getChoices()
             .getFirst()
             .getSubQuestionId());
+  }
+
+  @Test
+  public void getRecommendationSuccessfully() throws IOException {
+    QuestionnaireRecommendationRequest questionnaireRecommendationRequest =
+        QuestionnaireMock.createQuestionnaireRecommendationRequestMock();
+
+    String response =
+        IntegrationRequests.post(
+                "api/questionnaires/questionnaire/submit", questionnaireRecommendationRequest)
+            .then()
+            .assertThat()
+            .statusCode(HttpStatus.OK.value())
+            .extract()
+            .response()
+            .asString();
+
+    RecommendationResponse recommendationResponse =
+        objectMapper.readValue(response, RecommendationResponse.class);
+
+    // Assert based on the query made on DB
   }
 }

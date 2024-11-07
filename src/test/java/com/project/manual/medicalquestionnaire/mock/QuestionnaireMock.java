@@ -33,16 +33,21 @@ public abstract class QuestionnaireMock {
   public static QuestionnaireRecommendationRequest createQuestionnaireRecommendationRequestMock() {
     QuestionnaireRecommendationRequest questionnaireRecommendationRequest =
         new QuestionnaireRecommendationRequest();
+    Answer answerMock1 = createAnswerMock("1", "1");
+    Answer answerMock2 = createAnswerMock("2", "4");
+    Answer answerMock3 = createAnswerMock("3", "2");
+    Answer answerMock4 = createAnswerMock("4", "5");
+    Answer answerMock5 = createAnswerMock("5", "5");
     questionnaireRecommendationRequest.setUserId(1337L);
-    questionnaireRecommendationRequest.setQuestionnaireId("8029565399d62832fd94b645");
-    questionnaireRecommendationRequest.setAnswers(List.of(createAnswerMock()));
+    questionnaireRecommendationRequest.setQuestionnaireId("6729565399d62821fd94b245");
+    questionnaireRecommendationRequest.setAnswers(List.of(answerMock1));
     return questionnaireRecommendationRequest;
   }
 
-  public static Answer createAnswerMock() {
+  public static Answer createAnswerMock(String questionId, String choiceId) {
     Answer answer = new Answer();
-    answer.setQuestionId("1");
-    answer.setChoiceId("1");
+    answer.setQuestionId(questionId);
+    answer.setChoiceId(choiceId);
     answer.setSubQuestionChoiceId(null);
     return answer;
   }
